@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Book(models.Model):
 
-    book_title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
     isbn = models.CharField(unique=True, max_length=50)
     publication_date = models.DateField()
     available = models.BooleanField(default=True)
@@ -15,13 +15,12 @@ class Book(models.Model):
         verbose_name_plural = "Books"
         ordering = ["-publication_date"]
 
-    def __str__(self):
-        
+    def __str__(self):       
         return self.title
 
-    def get_absolute_url(self):
-        return reverse("Book_detail", kwargs={"pk": self.pk})
+
 class Author(models.Model):
+    
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     birthday = models.DateField(auto_now=False, auto_now_add=False)
@@ -32,9 +31,6 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
-
-    def get_absolute_url(self):
-        return reverse("Author_detail", kwargs={"pk": self.pk})
 
 
 class Loan(models.Model):
@@ -51,11 +47,7 @@ class Loan(models.Model):
         verbose_name_plural = "loans"
 
     def __str__(self):
-        return self.name
+        return f"{self.book.title} borrowed by {self.borrower}"
 
-    def get_absolute_url(self):
-        return reverse("loan_detail", kwargs={"pk": self.pk})
 
-    def get_not_returned_books(self):
-        return self.book.filter(effective_return_date = NULL)
 
