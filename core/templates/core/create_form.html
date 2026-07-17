@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ajouter un livre</title>
+</head>
+<body>
+  <h1>Ajouter un livre</h1>
+
+  <form method="post" action="">
+    {% csrf_token %}
+    <label for="id_title">Titre</label>
+    <input id="id_title" name="title" type="text" maxlength="50" required>
+
+    <label for="id_isbn">ISBN</label>
+    <input id="id_isbn" name="isbn" type="text" maxlength="50" required>
+
+    <div class="row">
+      <div>
+        <label for="id_publication_date">Date de publication</label>
+        <input id="id_publication_date" name="publication_date" type="date" required>
+      </div>
+
+      <div>
+        <label for="id_available">Disponible</label>
+        <select id="id_available" name="available">
+          <option value="True" selected>Oui</option>
+          <option value="False">Non</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="id_author">Auteur</label>
+    <select id="id_autors" name="author">
+      {% for author in authors %}
+        <option value={{author.id}} selected>{{author.name}} {{author.surname}}</option>
+      {% endfor %}
+    </select>
+    <label for="id_sumary">Résumé</label>
+    <textarea id="id_sumary" name="sumary" maxlength="2000" placeholder="Optionnel"></textarea>
+
+    <button type="submit">Enregistrer</button>
+  </form>
+
+  <p style="margin-top: 1.5rem;">
+    <a href="{% url 'get_all_books' %}">Retour à la liste</a>
+  </p>
+</body>
+</html>
+

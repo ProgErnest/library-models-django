@@ -7,8 +7,8 @@ class Book(models.Model):
     isbn = models.CharField(unique=True, max_length=50)
     publication_date = models.DateField()
     available = models.BooleanField(default=True)
-    autor = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True )
-    sumary = models.TextField(null=True)
+    author = models.ForeignKey("author", on_delete=models.SET_NULL, null=True)
+    summary = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = "Book"
@@ -20,7 +20,7 @@ class Book(models.Model):
 
 
 class Author(models.Model):
-    
+
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     birthday = models.DateField(auto_now=False, auto_now_add=False)
@@ -39,7 +39,7 @@ class Loan(models.Model):
     borrower = models.CharField(max_length=50)
     loan_date = models.DateField(auto_now=False, auto_now_add=True)
     return_date = models.DateField(auto_now=False, auto_now_add=False)
-    effective_return_date = models.DateField(null=True,auto_now=False, auto_now_add=False)
+    effective_return_date = models.DateField(null=True, blank=True,auto_now=False, auto_now_add=False)
     
 
     class Meta:
