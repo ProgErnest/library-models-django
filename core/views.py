@@ -71,3 +71,21 @@ def create_author(request):
     else:
         author_form = AuthorForm()
         return render(request,"core/author_form.html",{"author_form": author_form})
+def update_author(request, pk):
+    author = get_object_or_404(models.Author, id=pk)
+    if (request.method == "POST"):
+        author_form = AuthorForm(request.POST, instance=author)
+        if(author_form.is_valid()):
+            author_form.save()
+            return redirect("authors_list")
+    else:
+        author_form = AuthorForm(instance=author)
+        return render(request,"core/author_form.html",{"author_form": author_form})
+    
+def delete_author(request,pk):
+    if(request.method == "POST"):
+        author = get_object_or_404(models.Author, id=pk)
+        author.delete(id=pk)
+        return redirect("author_list")
+    else:
+        return HttpResponseNotAllowed(['POST'])
