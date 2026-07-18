@@ -7,9 +7,10 @@ from .forms import CreateBookForm
 def book_list(request):
     books = models.Book.objects.all()
     return render(request, "core/book_list.html", {'books':books})   
+
 def book_detail(request, pk):
-    book = get_object_or_404(models.Book, id=pk)
-    return render(request,"core/book_detail.html", {'book':book})
+    book = get_object_or_404(models.Book, id = pk)
+    return render(request,"core/book_detail.html", {'book' : book})
 
 def book_create(request):
     if (request.method == "POST"):
@@ -20,7 +21,7 @@ def book_create(request):
 
     elif (request.method == "GET"):
         form = CreateBookForm()
-        return render(request,"core/create_form.html",{"form": form})
+        return render(request,"core/create_form.html",{"form" : form})
     else:
         return HttpResponseNotAllowed()
 
@@ -45,3 +46,9 @@ def book_delete(request,pk):
     else:
         return HttpResponseNotAllowed(['POST'])
             
+
+# Sections for Autors
+
+def list_authors(request):
+    authors = models.Author.objects.all()
+    return render(request, "core/authors.html", {"authors" : authors})
