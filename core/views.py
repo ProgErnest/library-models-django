@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponseNotAllowed
 from . import models
-from .forms import CreateBookForm
+from .forms import CreateBookForm,AuthorForm
 # Create your views here.
 
 def book_list(request):
@@ -50,5 +50,24 @@ def book_delete(request,pk):
 # Sections for Autors
 
 def list_authors(request):
-    authors = models.Author.objects.all()
+    if request.GET.get('q') != None:
+        search = request.GET.get('q')
+        authors = models.Author.objects.filter(name__icontains = search)
+    else:
+        authors = models.Author.objects.all()
     return render(request, "core/authors.html", {"authors" : authors})
+
+def detail_author(request,pk):
+    author = get_object_or_404(models.Author, id = pk)
+    books = author.book_set.all()
+    return render(request,"core/detail_author.html",{"author": author, "books": books})
+
+def create_author(request):
+    if (request.method == "POST"):
+        author_form = AuthorForm(request.POST)
+        if(author_form.is_valid()):
+            author_form.save()
+            return redirect("authors_list")
+    else:
+        author_form = AuthorForm()
+        return render(request,"core/author_form.html",{"author_form": author_form})
