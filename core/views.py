@@ -24,7 +24,19 @@ def book_create(request):
     else:
         return HttpResponseNotAllowed()
 
-# @csrf_exempt
+def book_update(request, pk):
+    book = get_object_or_404(models.Book,id=pk)
+    if (request.method == "POST"):
+        form = CreateBookForm(request.POST, instance = book)
+        if(form.is_valid()):
+            form.save()
+            return redirect("get_all_books")
+    else:
+        form = CreateBookForm(instance = book)
+        return render(request,"core/create_form.html",{"form": form})
+
+
+
 def book_delete(request,pk):
     if request.method == 'POST':
         book = get_object_or_404(models.Book,id=pk)
