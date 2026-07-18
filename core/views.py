@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponseNotAllowed
 from . import models
+from .forms import CreateBookForm
 # Create your views here.
 
 def book_list(request):
@@ -12,26 +13,14 @@ def book_detail(request, pk):
 
 def book_create(request):
     if (request.method == "POST"):
-        title = request.POST.get('title')
-        isbn = request.POST.get('isbn')
-        author_id = request.POST.get('author')
-        
-        summary = request.POST.get('sumary')
-        available = request.POST.get('available')
-        publish_date = request.POST.get('publication_date')
-        final_author = get_object_or_404(models.Author,id=author_id)
-        models.Book.objects.create(
-            title=title,
-            isbn=isbn,
-            author=final_author,
-            summary=summary,
-            publication_date=publish_date,
-            available=available
-        )
-        return redirect("get_all_books")
+        form = CreateBookForm(request.POST)
+        if(form.is_valid()):
+            form.save()
+            return redirect("get_all_books")
+
     elif (request.method == "GET"):
-        authors = models.Author.objects.all()
-        return render(request,"core/create_form.html",{"authors": authors})
+        form = CreateBookForm()
+        return render(request,"core/create_form.html",{"form": form})
     else:
         return HttpResponseNotAllowed()
 

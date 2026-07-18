@@ -8,7 +8,12 @@
 <body>
   <h1>Ajouter un livre</h1>
 
-  <form method="post" action="">
+  <form method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+  {% comment %} <form method="post" action="">
     {% csrf_token %}
     <label for="id_title">Titre</label>
     <input id="id_title" name="title" type="text" maxlength="50" required>
@@ -41,7 +46,7 @@
     <textarea id="id_sumary" name="sumary" maxlength="2000" placeholder="Optionnel"></textarea>
 
     <button type="submit">Enregistrer</button>
-  </form>
+  </form> {% endcomment %}
 
   <p style="margin-top: 1.5rem;">
     <a href="{% url 'get_all_books' %}">Retour à la liste</a>
