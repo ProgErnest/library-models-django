@@ -7,7 +7,11 @@ from .forms import CreateBookForm,AuthorForm,LoanForm
 # Create your views here.
 
 def book_list(request):
-    books = models.Book.objects.all()
+    if request.GET.get('q') != None:
+        search = request.GET.get('q')
+        books = models.Book.objects.filter(title__icontains = search)
+    else:
+        books = models.Book.objects.all()
     return render(request, "core/book_list.html", {'books':books})   
 
 def book_detail(request, pk):
@@ -24,8 +28,7 @@ def book_create(request):
     elif (request.method == "GET"):
         form = CreateBookForm()
         return render(request,"core/create_form.html",{"form" : form})
-    else:
-        return HttpResponseNotAllowed()
+    return HttpResponseNotAllowed()
 
 def book_update(request, pk):
     book = get_object_or_404(models.Book,id=pk)
@@ -36,7 +39,7 @@ def book_update(request, pk):
             return redirect("get_all_books")
     else:
         form = CreateBookForm(instance = book)
-        return render(request,"core/create_form.html",{"form": form})
+    return render(request,"core/create_form.html",{"form": form})
 
 
 
@@ -45,8 +48,7 @@ def book_delete(request,pk):
         book = get_object_or_404(models.Book,id=pk)
         book.delete()
         return redirect("get_all_books")
-    else:
-        return HttpResponseNotAllowed(['POST'])
+    return HttpResponseNotAllowed(['POST'])
             
 
 # Sections for Autors
@@ -72,7 +74,7 @@ def create_author(request):
             return redirect("authors_list")
     else:
         author_form = AuthorForm()
-        return render(request,"core/author_form.html",{"author_form": author_form})
+    return render(request,"core/author_form.html",{"author_form": author_form})
 def update_author(request, pk):
     author = get_object_or_404(models.Author, id=pk)
     if (request.method == "POST"):
@@ -82,15 +84,14 @@ def update_author(request, pk):
             return redirect("authors_list")
     else:
         author_form = AuthorForm(instance=author)
-        return render(request,"core/author_form.html",{"author_form": author_form})
+    return render(request,"core/author_form.html",{"author_form": author_form})
     
 def delete_author(request,pk):
     if(request.method == "POST"):
         author = get_object_or_404(models.Author, id=pk)
         author.delete()
-        return redirect("author_list")
-    else:
-        return HttpResponseNotAllowed(['POST'])
+        return redirect("authors_list")
+    return HttpResponseNotAllowed(['POST'])
     
 
 ## Views from Loans
@@ -109,8 +110,7 @@ def initiate_loan(request):
         if loan_form.is_valid():
             loan_form.save()
             return redirect("loan_list")
-    else:
-        return render(request, "core/loan_form.html", {"loan_form": loan_form})
+    return render(request, "core/loan_form.html", {"loan_form": loan_form})
 
 def update_loan(request, pk):
     loan = get_object_or_404(models.Loan, id=pk)
@@ -119,12 +119,11 @@ def update_loan(request, pk):
         if loan_form.is_valid():
             loan_form.save()
             return redirect("loan_list")
-    else:
-        return render(request, "core/loan_form.html", {"loan_form": loan_form})
+    return render(request, "core/loan_form.html", {"loan_form": loan_form})
     
 
 @require_POST
 def delete_loan(request,pk):
     loan = get_object_or_404(models.Loan, id=pk)
     loan.delete()
-    return redirect("list_loan")
+    return redirect("loan_list")

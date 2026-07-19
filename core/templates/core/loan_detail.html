@@ -4,7 +4,7 @@
 <p>{{loan.book.isbn}}<p>
 </div> 
 {% if loan.effective_return_date %}
-    <p>Returned a book the : {{ loan.return_date }}
+    <p>Returned a book the : {{ loan.effective_return_date }}
 {% else %}
     <p>Not returned yet</p>
 {% endif %}

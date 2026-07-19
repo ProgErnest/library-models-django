@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'tailwind',
+    'theme',
 ]
 
 MIDDLEWARE = [
@@ -99,6 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+TAILWIND_APP_NAME = 'theme'
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
