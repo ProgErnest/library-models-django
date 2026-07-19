@@ -24,9 +24,9 @@ class LoanForm(forms.ModelForm):
     return_date = forms.DateField(
         widget= forms.DateInput(attrs = {'type': 'date'})
     )
-    effective_return_date = forms.DateField(
-        widget= forms.DateInput(attrs = {'type': 'date'})
-    )
+    # effective_return_date = forms.DateField(
+    #     widget= forms.DateInput(attrs = {'type': 'date'})
+    # )
     class Meta:
         model = Loan
-        fields = ['book','borrower','return_date','effective_return_date']
+        fields = ['book','borrower','return_date']

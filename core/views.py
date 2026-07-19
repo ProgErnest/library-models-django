@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponseNotAllowed
 from . import models
-from .forms import CreateBookForm,AuthorForm
+from .forms import CreateBookForm,AuthorForm,LoanForm
 # Create your views here.
 
 def book_list(request):
@@ -100,3 +100,12 @@ def list_loans(request):
 def detail_loan(request, pk):
     loan = get_object_or_404(models.Loan, id=pk)
     return render(request, "core/loan_detail.html", {"loan":loan})
+
+def initiate_loan(request):
+    loan_form = LoanForm(request.POST or None)
+    if(request.method == "POST"):
+        if loan_form.is_valid():
+            loan_form.save()
+            return redirect("loan_list")
+    else:
+        return render(request, "core/loan_form.html", {"loan_form": loan_form})
