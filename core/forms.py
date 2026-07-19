@@ -29,4 +29,4 @@ class LoanForm(forms.ModelForm):
     # )
     class Meta:
         model = Loan
-        fields = ['book','borrower','return_date']
+        fields = ['book','borrower','return_date','effective_return_date']

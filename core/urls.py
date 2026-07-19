@@ -16,7 +16,7 @@ urlpatterns = [
     path('loans/all/', views.list_loans, name="loan_list"),
     path('loans/detail/<int:pk>/', views.detail_loan, name="detail_loan"),
     path('loans/create/', views.initiate_loan, name="initiate_loan"),
-    path('loans/update/<int:pk>/', views.update_author, name="update_author"),
-    path('loans/delete/<int:pk>/', views.delete_author, name="delete_author"),
+    path('loans/update/<int:pk>/', views.update_loan, name="update_loan"),
+    path('loans/delete/<int:pk>/', views.delete_loan, name="delete_loan"),
     
 ]

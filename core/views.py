@@ -1,5 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponseNotAllowed
+from django.views.decorators.http import require_POST
+
 from . import models
 from .forms import CreateBookForm,AuthorForm,LoanForm
 # Create your views here.
@@ -85,7 +87,7 @@ def update_author(request, pk):
 def delete_author(request,pk):
     if(request.method == "POST"):
         author = get_object_or_404(models.Author, id=pk)
-        author.delete(id=pk)
+        author.delete()
         return redirect("author_list")
     else:
         return HttpResponseNotAllowed(['POST'])
@@ -109,3 +111,20 @@ def initiate_loan(request):
             return redirect("loan_list")
     else:
         return render(request, "core/loan_form.html", {"loan_form": loan_form})
+
+def update_loan(request, pk):
+    loan = get_object_or_404(models.Loan, id=pk)
+    loan_form = LoanForm(request.POST or None, instance=loan)
+    if(request.method == "POST"):
+        if loan_form.is_valid():
+            loan_form.save()
+            return redirect("loan_list")
+    else:
+        return render(request, "core/loan_form.html", {"loan_form": loan_form})
+    
+
+@require_POST
+def delete_loan(request,pk):
+    loan = get_object_or_404(models.Loan, id=pk)
+    loan.delete()
+    return redirect("list_loan")
