@@ -89,3 +89,10 @@ def delete_author(request,pk):
         return redirect("author_list")
     else:
         return HttpResponseNotAllowed(['POST'])
+    
+
+## Views from Loans
+
+def list_loans(request):
+    loans = models.Loan.objects.all()
+    return render(request, "core/loans_list.html",{"loans": loans})
