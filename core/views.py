@@ -96,3 +96,7 @@ def delete_author(request,pk):
 def list_loans(request):
     loans = models.Loan.objects.all()
     return render(request, "core/loans_list.html",{"loans": loans})
+
+def detail_loan(request, pk):
+    loan = get_object_or_404(models.Loan, id=pk)
+    return render(request, "core/loan_detail.html", {"loan":loan})
