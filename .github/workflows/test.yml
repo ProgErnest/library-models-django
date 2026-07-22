@@ -14,4 +14,4 @@ jobs:
       - name: Verifier la version python
         run: python --version
       - name: Installer Django et autres
-        run: pip install requirements.txt
+        run: pip install -r requirements.txt
