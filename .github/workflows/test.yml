@@ -1,0 +1,13 @@
+# .github/workflows/test.yml
+name: Mon premier workflow
+
+on: push
+
+jobs:
+  dire_bonjour:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer mon code
+        uses: actions/checkout@v4
+      - name: Lister les fichiers présents
+        run: ls -la
