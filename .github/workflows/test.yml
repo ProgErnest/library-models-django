@@ -13,3 +13,5 @@ jobs:
         run: ls -la
       - name: Verifier la version python
         run: python --version
+      - name: Installer Django et autres
+        run: pip intall requirements.txt
