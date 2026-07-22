@@ -7,7 +7,7 @@ from .forms import CreateBookForm,AuthorForm,LoanForm
 # Create your views here.
 
 def book_list(request):
-    if request.GET.get('q') != None:
+    if request.GET.get('q') != None: 
         search = request.GET.get('q')
         books = models.Book.objects.filter(title__icontains = search)
     else:
@@ -108,6 +108,9 @@ def initiate_loan(request):
     loan_form = LoanForm(request.POST or None)
     if(request.method == "POST"):
         if loan_form.is_valid():
+            book = loan_form.cleaned_data['book']
+            book.available = False
+            book.save()
             loan_form.save()
             return redirect("loan_list")
     return render(request, "core/loan_form.html", {"loan_form": loan_form})
