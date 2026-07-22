@@ -4,10 +4,15 @@ from django.db import models
 class Book(models.Model):
 
     title = models.CharField(max_length=50)
+    subtitle = models.CharField(max_length=50)
     isbn = models.CharField(unique=True, max_length=50)
+    language = models.CharField(max_length=50)
+    genre = models.CharField(max_length=50)
+    num_pages = models.PositiveIntegerField()
     publication_date = models.DateField()
     available = models.BooleanField(default=True)
     author = models.ForeignKey("author", on_delete=models.SET_NULL, null=True)
+
     summary = models.TextField(null=True, blank=True)
 
     class Meta:
