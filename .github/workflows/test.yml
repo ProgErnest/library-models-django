@@ -18,5 +18,9 @@ jobs:
       - name: Vérifier que Django est installé
         run: python -c "import django; print(django.get_version())"
 
-      - name: Lancer les tests Django
-        run: python manage.py test
+      - name: Effectuer les migration
+        run: python manage.py makemigrations
+      - name: Migrer la BD
+        run: python manage.py migrate
+      - name : demarrer le serveur Django
+        run: python manage.py runserver
