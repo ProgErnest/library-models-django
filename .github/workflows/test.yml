@@ -11,3 +11,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Lister les fichiers présents
         run: ls -la
+      - name: Verifier la version python
+        run: python --version
