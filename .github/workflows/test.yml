@@ -15,3 +15,5 @@ jobs:
         run: python --version
       - name: Installer Django et autres
         run: pip install -r requirements.txt
+      - name: Vérifier que Django est installé
+        run: python -c "import django; print(django.get_version())"
