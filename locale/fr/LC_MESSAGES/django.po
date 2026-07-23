@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-23 04:15+0000\n"
+"POT-Creation-Date: 2026-07-23 10:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr "titre"
 msgid "subtitle"
 msgstr "sous titre"
 
-#: core/models.py:9
+#: core/models.py:9 core/templates/core/book_list.html:110
 msgid "isbn"
 msgstr "code barre"
 
@@ -52,7 +52,7 @@ msgstr "nombre de pages"
 
 #: core/models.py:13
 msgid "publication date"
-msgstr "date de publications"
+msgstr "date de publication"
 
 #: core/models.py:15
 msgid "author"
@@ -60,7 +60,7 @@ msgstr "auteur"
 
 #: core/models.py:17
 msgid "summary"
-msgstr "resumme"
+msgstr "resume"
 
 #: core/models.py:20
 msgid "Book"
@@ -82,7 +82,7 @@ msgstr "prenom"
 msgid "birthday"
 msgstr "date de naissance"
 
-#: core/models.py:34 core/templates/core/book_list.html:110
+#: core/models.py:34 core/templates/core/book_list.html:134
 msgid "Author"
 msgstr "Auteur"
 
@@ -90,75 +90,85 @@ msgstr "Auteur"
 msgid "Authors"
 msgstr "Auteurs"
 
-#: core/templates/core/book_list.html:11
+#: core/templates/core/book_list.html:23
 msgid "Book List"
 msgstr "Liste de livres"
 
-#: core/templates/core/book_list.html:14
+#: core/templates/core/book_list.html:26
 msgid "See information about all books"
 msgstr "COnsulter les informations a propos de tous les livres"
 
-#: core/templates/core/book_list.html:21
+#: core/templates/core/book_list.html:33
 msgid "view all"
 msgstr "Tout voir"
 
-#: core/templates/core/book_list.html:33
+#: core/templates/core/book_list.html:45
 msgid "Add book"
 msgstr "Ajouter un livre"
 
-#: core/templates/core/book_list.html:83
+#: core/templates/core/book_list.html:95
 msgid "Search"
 msgstr "rechercher"
 
-#: core/templates/core/book_list.html:98
+#: core/templates/core/book_list.html:122
 msgid "Title"
 msgstr "Titre"
 
-#: core/templates/core/book_list.html:122
+#: core/templates/core/book_list.html:146
 msgid "Status"
 msgstr "Statut"
 
-#: core/templates/core/book_list.html:134
+#: core/templates/core/book_list.html:158
 msgid "Publication date"
 msgstr "date de publication"
 
-#: core/templates/core/book_list.html:146
+#: core/templates/core/book_list.html:170
 msgid "Actions"
 msgstr "Actions"
 
-#: core/templates/core/book_list.html:170
-#, python-format
-msgid ""
-"\n"
-"                        %(book.author.surname)s %(book.author.name)s\n"
-"                      "
-msgstr ""
-"\n"
-"                        %(book.author.surname)s %(book.author.name)s\n"
-"                      "
-#: core/templates/core/book_list.html:177
-msgid "Organization"
-msgstr "Entreprise"
-
 #: core/templates/core/book_list.html:186
+msgid "pages"
+msgstr "pages"
+
+#: core/templates/core/book_list.html:221
 msgid "Available"
 msgstr "Disponible"
 
-#: core/templates/core/book_list.html:191
+#: core/templates/core/book_list.html:226
 msgid "On loan"
 msgstr "En pret"
 
-#: core/templates/core/book_list.html:252
+#: core/templates/core/book_list.html:287
 msgid "Page 1 of 10"
 msgstr "page 1/10"
 
-#: core/templates/core/book_list.html:258
+#: core/templates/core/book_list.html:293
 msgid "Previous"
 msgstr "precedent"
 
-#: core/templates/core/book_list.html:263
+#: core/templates/core/book_list.html:298
 msgid "Next"
 msgstr "suivant"
+
+#: core/templates/core/create_form.html:23
+msgid "Ajouter un livre"
+msgstr "Ajouter un livre"
+
+#: core/templates/core/create_form.html:25
+msgid "Remplissez les informations pour enregistrer un nouveau livre."
+msgstr "Remplissez les informations pour enregistrer un nouveau livre."
+
+#: core/templates/core/create_form.html:40
+msgid "Livre disponible à l'emprunt"
+msgstr "Livre disponible à l'emprunt"
+
+#: core/templates/core/create_form.html:62
+msgid "Enregistrer"
+msgstr "Enregistrer"
+
+#: core/templates/core/create_form.html:72
+msgid "Retour à la liste"
+msgstr "Retour à la liste"
 
 #: venv/lib/python3.14/site-packages/click/_termui_impl.py:192
 msgid "d"
@@ -1741,3 +1751,16 @@ msgstr ""
 #: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:236
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "Organization"
+#~ msgstr "Entreprise"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                        %(book.author.surname)s %(book.author.name)s\n"
+#~ "                      "
+#~ msgstr ""
+#~ "\n"
+#~ "                        %(book.author.surname)s %(book.author.name)s\n"
+#~ "                      "
