@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponseNotAllowed
 from django.views.decorators.http import require_POST
+from django.utils.translation import gettext as _
 
 from . import models
 from .forms import CreateBookForm,AuthorForm,LoanForm
