@@ -1,3 +1,16 @@
+{% load i18n %}
+<form action="{% url 'set_language' %}" method="post">
+  {% csrf_token %}
+  <select name="language" onchange="this.form.submit()">
+    {% get_current_language as CURRENT_LANGUAGE %}
+    {% get_available_languages as LANGUAGES %}
+    {% for lang_code, lang_name in LANGUAGES %}
+      <option value="{{ lang_code }}" {% if lang_code == CURRENT_LANGUAGE %}selected{% endif %}>
+        {{ lang_name }}
+      </option>
+    {% endfor %}
+  </select>
+</form>
 {% load tailwind_tags %}
 {% tailwind_css %}
 
@@ -7,17 +20,17 @@
       <div>
         <h5
           class="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-gray-900">
-          Book List
+          {% trans "Book List" %}
         </h5>
         <p class="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-          See information about all books
+          {% trans "See information about all books" %} 
         </p>
       </div>
       <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
         <button
           class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button">
-          view all
+          {% trans "view all" %}
         </button>
         <a href={% url "create_book" %}>
             <button
@@ -29,7 +42,7 @@
                 d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z">
                 </path>
             </svg>
-            Add book
+            {% trans "Add book" %}
             </button>
         </a>
       </div>
@@ -78,7 +91,7 @@
                     placeholder=" " name="q" />
                 <label
                     class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-gray-500">
-                    Search
+                    {% trans "Search" %}
                 </label>
             </form>
         </div>
@@ -93,7 +106,7 @@
             class="p-4 transition-colors cursor-pointer border-y border-gray-300 bg-gray-100/50 hover:bg-gray-200">
             <p
               class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-gray-900 opacity-70">
-              Title
+              {% trans "isbn" %}
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                 stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -105,7 +118,7 @@
             class="p-4 transition-colors cursor-pointer border-y border-gray-300 bg-gray-100/50 hover:bg-gray-200">
             <p
               class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-gray-900 opacity-70">
-              Author
+              {% trans "Title" %}
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                 stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -117,7 +130,7 @@
             class="p-4 transition-colors cursor-pointer border-y border-gray-300 bg-gray-100/50 hover:bg-gray-200">
             <p
               class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-gray-900 opacity-70">
-              Status
+              {% trans "Author" %}
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                 stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -129,7 +142,7 @@
             class="p-4 transition-colors cursor-pointer border-y border-gray-300 bg-gray-100/50 hover:bg-gray-200">
             <p
               class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-gray-900 opacity-70">
-              Publication date
+              {% trans "Status" %}
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                 stroke="currentColor" aria-hidden="true" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -141,7 +154,19 @@
             class="p-4 transition-colors cursor-pointer border-y border-gray-300 bg-gray-100/50 hover:bg-gray-200">
             <p
               class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-gray-900 opacity-70">
-            Actions
+              {% trans "Publication date" %}
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+              </svg>
+            </p>
+          </th>
+          <th
+            class="p-4 transition-colors cursor-pointer border-y border-gray-300 bg-gray-100/50 hover:bg-gray-200">
+            <p
+              class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-gray-900 opacity-70">
+            {% trans "Actions" %}
             </p>
           </th>
         </tr>
@@ -153,11 +178,24 @@
                     <div class="flex items-center gap-3">
                     <div class="flex flex-col">
                         <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-900">
-                        {{ book.title}}
+                        {% trans book.isbn %}
                         </p>
                         <p
                         class="block font-sans text-sm antialiased font-normal leading-normal text-gray-900 opacity-70">
-                        {{ book.isbn }}
+                        {{ book.num_pages }} {% trans "pages" %}
+                        </p>
+                    </div>
+                    </div>
+                </td>
+                <td class="p-4 border-b border-gray-400">
+                    <div class="flex items-center gap-3">
+                    <div class="flex flex-col">
+                        <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-900">
+                        {% trans book.title %}
+                        </p>
+                        <p
+                        class="block font-sans text-sm antialiased font-normal leading-normal text-gray-900 opacity-70">
+                        {% trans book.subtitle %}
                         </p>
                     </div>
                     </div>
@@ -166,10 +204,11 @@
                     <div class="flex flex-col">
                     <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-900">
                         {{ book.author.surname }} {{ book.author.name }}
+                      
                     </p>
                     <p
                         class="block font-sans text-sm antialiased font-normal leading-normal text-gray-900 opacity-70">
-                        Organization
+                        {% trans book.genre %}
                     </p>
                     </div>
                 </td>
@@ -178,12 +217,12 @@
                         {% if book.available %}
                             <div
                                 class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/30">
-                                <span class="">Available</span>
+                                <span class="">{% trans "Available" %}</span>
                             </div>
                         {% else %}
                             <div
                                 class="relative grid items-center px-2 py-1 font-sans text-xs font-bold uppercase rounded-md select-none whitespace-nowrap bg-red-500/40 text-black/70">
-                                <span class="">On loan</span>
+                                <span class="">{% trans "On loan" %}</span>
                             </div>
                         {% endif %}
 
@@ -191,7 +230,7 @@
                 </td>
                 <td class="p-4 border-b border-gray-400">
                     <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-900">
-                    {{ book.publication_date | date:"Y-m-d"}}
+                    {{book.publication_date|date:"DATE_FORMAT"}}
                     </p>
                 </td>
                 <td class="p-4 border-b border-gray-400">
@@ -244,18 +283,18 @@
   </div>
   <div class="flex items-center justify-between p-4 border-t border-gray-50">
     <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-900">
-      Page 1 of 10
+      {% trans "Page 1 of 10" %}
     </p>
     <div class="flex gap-2">
       <button
         class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
         type="button">
-        Previous
+        {% trans "Previous" %}
       </button>
       <button
         class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
         type="button">
-        Next
+        {% trans "Next" %}
       </button>
     </div>
   </div>

@@ -1,0 +1,24 @@
+# .github/workflows/test.yml
+name: Mon premier workflow
+
+on: push
+
+jobs:
+  dire_bonjour:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer mon code
+        uses: actions/checkout@v4
+      - name: Lister les fichiers présents
+        run: ls -la
+      - name: Verifier la version python
+        run: python --version
+      - name: Installer Django et autres
+        run: pip install -r requirements.txt
+      - name: Vérifier que Django est installé
+        run: python -c "import django; print(django.get_version())"
+
+      - name: Effectuer les migration
+        run: python manage.py makemigrations
+      - name: Migrer la BD
+        run: python manage.py migrate
